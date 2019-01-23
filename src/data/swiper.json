@@ -1,6 +1,18 @@
 [
-    {"img":"./images/01.jpg"},
-    {"img":"./images/02.jpg"},
-    {"img":"./images/03.jpg"},
-    {"img":"./images/04.jpg"}
+    {
+        "img":"./images/01.jpg",
+        "msrc":"./images/01_small.jpg"
+    },
+    {
+        "img":"./images/02.jpg",
+        "msrc":"./images/02_small.jpg"
+    },
+    {
+        "img":"./images/03.jpg",
+        "msrc":"./images/03_small.jpg"
+    },
+    {
+        "img":"./images/04.jpg",
+        "msrc":"./images/04_small.jpg"
+    }
 ]
