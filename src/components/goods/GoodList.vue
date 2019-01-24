@@ -1,52 +1,54 @@
 <template>
     <div class='goods-list'>
-        <div class='goods-item'>
-            <img src='../../images/01_small.jpg'/>
-            <h1 class='title'>标题标题标题标题标题标题</h1>
+        <div class='goods-item' v-for='item in goodslist' :key='item.id' @click='goDetail(item.id)'>
+            <img :src='item.img_url'/>
+            <h1 class='title'>{{item.title}}</h1>
             <div class='info'>
                 <p class='price'>
-                    <span class='now'>￥2199</span>
-                    <span class='old'>￥2399</span>
+                    <span class='now'>￥{{item.sell_price}}</span>
+                    <span class='old'>￥{{item.market_price}}</span>
                 </p>
                 <p class='sell'>
                     <span>热卖中</span>
-                    <span>剩余60件</span>
+                    <span>剩余{{item.stock_quantity}}件</span>
                 </p>
             </div>
         </div>
-        <div class='goods-item'>
-            <img src='../../images/01_small.jpg'/>
-            <h1 class='title'>标题标题标题标题标题标题标题标题标题标题标题标题</h1>
-            <div class='info'>
-                <p class='price'>
-                    <span class='now'>￥2199</span>
-                    <span class='old'>￥2399</span>
-                </p>
-                <p class='sell'>
-                    <span>热卖中</span>
-                    <span>剩余60件</span>
-                </p>
-            </div>
-        </div>
-        <div class='goods-item'>
-            <img src='../../images/01_small.jpg'/>
-            <h1 class='title'>标题标题标题标题标题标题标题标题标题标题标题标题</h1>
-            <div class='info'>
-                <p class='price'>
-                    <span class='now'>￥2199</span>
-                    <span class='old'>￥2399</span>
-                </p>
-                <p class='sell'>
-                    <span>热卖中</span>
-                    <span>剩余60件</span>
-                </p>
-            </div>
-        </div>
+        <mt-button type='danger' size='large' @click='getMore'>加载更多</mt-button>
     </div>
 </template>
 <script>
+import {Toast} from 'mint-ui';
 export default {
-    
+    data(){
+        return {
+            goodslist:[],
+            pageIndex:1
+        }
+    },
+    created(){
+        this.getGoodsList()
+    },
+    methods:{
+        getGoodsList(){
+            this.$http.get('../../data/goodslist.json').then(result=>{
+                if(result.status==200){
+                    this.goodslist = this.goodslist.concat(result.body);
+                }else{
+                    Toast('获取商品列表失败')
+                }
+            })
+        },
+        getMore(){
+            this.pageIndex++;
+            this.getGoodsList()
+        },
+        goDetail(id){
+            // this.$router.push('/home/goodinfo/'+id)
+            //this.$router.push({path:'/home/goodinfo/'+id})
+            this.$router.push({name:"goodsinfo",params:{id}})
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>

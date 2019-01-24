@@ -8,6 +8,9 @@ import NewsInfo from './components/news/NewsInfo.vue';
 import PhotoList from './components/photos/PhotoList.vue';
 import PhotoInfo from './components/photos/PhotoInfo.vue';
 import GoodsList from './components/goods/GoodList.vue';
+import GoodInfo from './components/goods/GoodInfo.vue';
+import GoodDesc from './components/goods/GoodDesc.vue';
+import GoodComment from './components/goods/GoodComment.vue';
 var router = new VueRouter({
     routes:[
         {path:'/',redirect:'/home'},
@@ -19,7 +22,10 @@ var router = new VueRouter({
         {component:NewsInfo,path:'/home/newsinfo/:id'},
         {component:PhotoList,path:'/home/photolist'},
         {component:PhotoInfo,path:'/home/photoinfo/:id'},
-        {component:GoodsList,path:'/home/goodslist'}
+        {component:GoodsList,path:'/home/goodslist'},
+        {component:GoodInfo,path:'/home/goodinfo/:id',name:'goodsinfo'},
+        {component:GoodDesc,path:'/home/goodsdesc/:id',name:'goodsdesc'},
+        {component:GoodComment,path:'/hoome/goodscomment/:id',name:'goodscomment'}
     ],
     linkActiveClass:'mui-active'
 })

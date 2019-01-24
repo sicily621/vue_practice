@@ -1,5 +1,9 @@
 <template>
     <div class='app-container'>
+		<button type="button" class="mui-btn mui-btn-link" @click='goBack'>
+			<span class="mui-icon mui-icon-back"></span>
+			返回
+		</button>
         <mt-header fixed title="程序员·vue项目"></mt-header>
 		<transition>
         	<router-view></router-view>
@@ -14,7 +18,7 @@
 				<span class="mui-tab-label">会员</span>
 			</router-link>
 			<router-link class="mui-tab-item-zm" to="/shopcar">
-				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge">0</span></span>
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart"><span class="mui-badge" id='badge'>0</span></span>
 				<span class="mui-tab-label">购物车</span>
 			</router-link>
 			<router-link class="mui-tab-item-zm" to="/search">
@@ -25,14 +29,28 @@
     </div>
 </template>
 <script>
-
+	export default {
+		methods:{
+			goBack(){
+				console.log(this.$router)
+				this.$router.go(-1)
+			}
+		}
+	}
 </script>
 <style lang="scss" scoped>
 	.mint-header{z-index: 99}
     .app-container{
 		padding-top:40px;
 		padding-bottom:50px;
-		overflow-x: hidden
+		overflow-x: hidden;
+		.mui-btn-link{
+			position: fixed;
+			left:0;
+			top:5px;
+			z-index: 100;
+			color: #fff;
+		}
 	}
 	.v-enter{
 		opacity: 0;
