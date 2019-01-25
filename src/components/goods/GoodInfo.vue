@@ -77,7 +77,11 @@
             getGoodsInfo(){
                 this.$http.get('../../data/goodslist.json').then(result=>{
                     if(result.status==200){
-                        this.goodInfo = result.body[0]
+                        result.body.some(item=>{
+                            if(item.id==this.id){
+                                this.goodInfo = item
+                            }
+                        })
                     }else{
                         Toast('获取商品信息失败')
                     }
@@ -91,6 +95,13 @@
             },
             addShopCar(){
                 this.ballFlag = !this.ballFlag;
+                var goodsinfo = {
+                    id:this.id,
+                    count:this.selectedCount,
+                    price:this.goodInfo.sell_price,
+                    selected:true
+                };
+                this.$store.commit('addToCar',goodsinfo);
             },
             beforeEnter(el){
                 el.style.transform = 'translate(0,0)';
